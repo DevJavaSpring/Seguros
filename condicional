@@ -1,1 +1,85 @@
+quiero que me ayudes a crear una logica
 
+para un tab de un wizard de primeface
+
+String STEP_ACCESO_CONFIGURACION  = "idTabAccesoConfig";
+String STEP_GENERACION_CARGA_JSON = "idTabGeneracionCargaJson";
+String STEP_PRESENTACION_NOTAS    = "idTabPresentacionNotas";
+String STEP_CERRAR_CONFIRMACION   = "idTabCerrarConfirmacion";
+String STEP_RECTIFICATIVA         = "idTabRectificativa";
+
+String VACIO = "VACIO";
+String CARGADO = "CARGADO";
+String PRESENTADO = "PRESENTADO";
+String CERRADO = "CERRADO";
+
+String Anteriror = event.getOldStep();
+String Posterior = event.getNewStep();
+String Estado;
+
+if(Anteriror == STEP_ACCESO_CONFIGURACION && Posterior == STEP_GENERACION_CARGA_JSON){
+    if(Estado == null){
+        System.out.println("DEBE CONSULTAR EL ESTADO DE PRESENTACION DE PARA EL PERIDOD SELECCIONADO");
+        return Anteriror;
+    }
+
+    if(Estado == VACIO && Estado == CARGADO && Estado == PRESENTADO){
+        System.out.println("Empieza desde el tab idTabAccesoConfig");
+        return Posterior;
+    }
+
+    if(Estado == CERRADO){
+        System.out.println("Solo se debe habilitar STEP_RECTIFICATIVA y Posterior debe ser STEP_RECTIFICATIVA");
+        return STEP_RECTIFICATIVA
+    }
+}
+
+if(Anteriror == STEP_GENERACION_CARGA_JSON){
+    STEP_GENERACION_CARGA_JSON
+    if(Estado == VACIO){
+        System.out.println("Para continuar de realizar una CARGA del json en RI");
+        returnn Anteriror;
+    }
+    if(Estado == CARGADO || Estado == PRESENTADO){
+        System.out.println("siguiente");
+        returnn Posterior;
+    }
+}
+
+if(Anteriror == STEP_PRESENTACION_NOTAS){
+    STEP_GENERACION_CARGA_JSO
+    if(Estado == CARGADO){
+         System.out.println("Para continuar de realizar una PRESENTACION del json en RI");
+        returnn Anteriror;
+    }
+
+    if(Estado == PRESENTADO){
+        System.out.println("siguiente");
+        returnn Posterior;
+    }
+}
+
+
+if(Posterior == STEP_CERRAR_CONFIRMACION){
+    STEP_GENERACION_CARGA_JSO
+    if(Estado != PRESENTADO){
+        System.out.println("Para continuar de realizar una PRESENTACION del json en RI");
+        returnn Anteriror;
+    }
+
+    if(Estado == PRESENTADO){
+        System.out.println("siguiente");
+        returnn Posterior;
+    }
+}
+
+
+primeo se valida que se escriba en la api correctamente y despues se persiste localmente pero si cocurres un erro en la escritura local  puede retroceder con un transactiomnal 
+
+public void Cargar();
+public void Presentar();
+public void Cerrar();
+public void Rectificar();
+
+
+lo ideal es trabajar con la entidad propiamente tratada con el response desde el servicion cliente
